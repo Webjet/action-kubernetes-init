@@ -21,9 +21,10 @@ runs:
         echo "::set-env name=REGISTRY_SUBPATH::$REGISTRY_SUBPATH"
         echo "::set-env name=COMPANY::$COMPANY"
         echo "::set-env name=KUBEBOT::$KUBEBOT"
-        echo $CONTAINERREGISTRY
-        echo $REGISTRY_SUBPATH
-        echo $COMPANY
-        echo $KUBEBOT
+
+        GITHUBSHA=${{ github.sha }}
+        TAG=$(echo $GITHUBSHA | cut -c1-6)
+        echo "::set-env name=TAG::$TAG"
+
       shell: bash
 
