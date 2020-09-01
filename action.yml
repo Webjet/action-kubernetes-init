@@ -12,7 +12,7 @@ runs:
   using: "composite"
   steps: 
     - name: Check Hash
-    - run: |
+      run: |
         head_hash=$(git rev-parse HEAD)
         current_hash=${GITHUB_SHA}
         echo "HEAD hash=$head_hash"
@@ -26,7 +26,7 @@ runs:
       shell: bash
 
     - name: Init Envs
-    - run: |
+      run: |
         echo ${{ inputs.env-json-base64 }} | base64 --decode > data.json
         CONTAINERREGISTRY=$(jq -r '.REGISTRY' data.json)
         REGISTRY_SUBPATH=$(jq -r '.REGISTRY_SUBPATH' data.json)
