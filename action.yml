@@ -48,5 +48,6 @@ runs:
 
         az login --service-principal -u $CLIENTID -p $CLIENTSECRET --tenant $TENANT
         az acr login -n $CONTAINERREGISTRY
+        echo "ACR login successfully!"
       shell: bash
 
