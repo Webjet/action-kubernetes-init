@@ -27,11 +27,14 @@ runs:
 
     - name: Init Envs
       run: |
-        echo ${{ inputs.env-json-base64 }} | base64 --decode > data.json
-        CONTAINERREGISTRY=$(jq -r '.REGISTRY' data.json)
-        REPOSITORY=$(jq -r '.REPOSITORY' data.json)
-        COMPANY=$(jq -r '.COMPANY' data.json)
-        KUBEBOT=$(jq -r '.KUBEBOT' data.json)
+        data=$(echo ${{ inputs.env-json-base64 }} | base64 --decode)
+        CONTAINERREGISTRY=$(echo $data | jq -r '.REGISTRY')
+        REPOSITORY=$(echo $data | jq -r '.REPOSITORY')
+        COMPANY=$(echo $data | jq -r '.COMPANY')
+        KUBEBOT=$(echo $data | jq -r '.KUBEBOT')
+        CLIENTID=$(echo $data | jq -r '.CLIENTID')
+        CLIENTSECRET=$(echo $data | jq -r '.CLIENTSECRET')
+        TENANT=$(echo $data | jq -r '.TENANT')
         echo "CONTAINERREGISTRY=$CONTAINERREGISTRY" >> $GITHUB_ENV
         echo "REPOSITORY=$REPOSITORY" >> $GITHUB_ENV
         echo "COMPANY=$COMPANY" >> $GITHUB_ENV
@@ -42,5 +45,8 @@ runs:
         echo "TAG=$TAG" >> $GITHUB_ENV
 
         echo "init environment variables ok!"
+
+        az login --service-principal -u $CLIENTID -p $CLIENTSECRET --tenant $TENANT
+        az acr login -n $CONTAINERREGISTRY
       shell: bash
 
