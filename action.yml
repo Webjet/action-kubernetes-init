@@ -27,7 +27,7 @@ runs:
 
     - name: Init Envs
       run: |
-        data='${{ inputs.env-json-base64 }}'
+        data=$(echo ${{ inputs.env-json-base64 }} | base64 --decode)
         CONTAINERREGISTRY=$(echo $data | jq -r '.REGISTRY')
         REPOSITORY=$(echo $data | jq -r '.REPOSITORY')
         COMPANY=$(echo $data | jq -r '.COMPANY')
