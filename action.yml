@@ -50,4 +50,10 @@ runs:
         az acr login -n $CONTAINERREGISTRY
         echo "ACR login successfully!"
       shell: bash
+    
+    - name: test
+      if: ${{ github.ref == 'refs/heads/xxxx' }}
+      run: |
+        echo "blah"
+      shell: bash
 
