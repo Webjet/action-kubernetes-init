@@ -52,7 +52,7 @@ runs:
       shell: bash
     
     - name: test
-      if: ${{ github.ref == 'refs/heads/xxxx' }}
+      if: ${{ github.ref == 'refs/heads/main' }}
       run: |
         echo "blah"
       shell: bash
