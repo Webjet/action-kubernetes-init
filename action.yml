@@ -41,7 +41,7 @@ runs:
         echo "KUBEBOT=$KUBEBOT" >> $GITHUB_ENV
 
         GITHUBSHA=${{ github.sha }}
-        TIMESTAMP=$(date +'%Y-%m-%d_%H-%M')
+        TIMESTAMP=$(date +'%Y%m%d%H%M%S')
         TAG=$(echo $GITHUBSHA | cut -c1-6)-$TIMESTAMP
         echo "TAG=$TAG" >> $GITHUB_ENV
 
