@@ -39,9 +39,10 @@ runs:
         echo "REPOSITORY=$REPOSITORY" >> $GITHUB_ENV
         echo "COMPANY=$COMPANY" >> $GITHUB_ENV
         echo "KUBEBOT=$KUBEBOT" >> $GITHUB_ENV
-        
+
         GITHUBSHA=${{ github.sha }}
-        TAG=$(echo $GITHUBSHA | cut -c1-6)
+        TIMESTAMP=$(date +'%Y%m%d%H%M%S')
+        TAG=$(echo $GITHUBSHA | cut -c1-6)-$TIMESTAMP
         echo "TAG=$TAG" >> $GITHUB_ENV
 
         echo "init environment variables ok!"
